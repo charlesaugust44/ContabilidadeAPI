@@ -2,13 +2,10 @@
 
 use Laravel\Lumen\Routing\Router;
 
-/**
- * @var $router Router
- */
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
-
-$router->group(['prefix' => 'api/v1/'],function (Router $router){
-
+$router->group(['prefix' => 'contabilidade/api/'], function (Router $router) {
+    $router->post('user', 'UsersController@create');
+    $router->get('user/{id}', 'UsersController@read');
+    $router->get('user', 'UsersController@readAll');
+    $router->put('user/{id}','UsersController@update');
+    $router->delete('user/{id}','UsersController@delete');
 });

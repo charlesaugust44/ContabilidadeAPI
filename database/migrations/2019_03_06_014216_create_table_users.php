@@ -17,10 +17,10 @@ class CreateTableUsers extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('user');
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->boolean('admin');
-            $table->string('token');
-            $table->string('secret');
+            $table->string('token')->nullable();
+            $table->string('secret')->nullable();
             $table->timestamps();
         });
     }
