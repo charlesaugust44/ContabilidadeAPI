@@ -17,7 +17,8 @@ class CreateTableClients extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('address');
-            $table->double('total_debt');
+            $table->double('total_debt')->default(0);
+            $table->boolean('deleted')->default(false);
             $table->timestamps();
         });
     }

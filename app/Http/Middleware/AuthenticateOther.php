@@ -37,8 +37,8 @@ class AuthenticateOther
     public function handle($request, Closure $next, $guard = null)
     {
         $user = Auth::user();
-        if (!$user) {
-            return response("Unauthorized", 400);
+        if ($user === null) {
+            return response("Unauthorized", 401);
         }
 
         return $next($request);

@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class ClientModification extends Model
 {
+    const
+        CREATE = 0,
+        UPDATE = 1,
+        DELETE = 2;
     /**
      * @var array
      */

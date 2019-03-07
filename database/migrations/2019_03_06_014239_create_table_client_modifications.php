@@ -18,7 +18,7 @@ class CreateTableClientModifications extends Migration
             $table->bigInteger('client_id');
             $table->bigInteger('user_id');
             $table->tinyInteger('type')->unsigned();
-            $table->text('changes');
+            $table->text('changes')->nullable();
             $table->timestamps();
         });
     }
