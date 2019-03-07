@@ -57,6 +57,11 @@ $router->group(['prefix' => 'contabilidade/api/client'], function (Router $route
         'uses' => 'ClientsController@read'
     ]);
 
+    $router->get('/{id}/modifications', [
+        'middleware' => 'authAdmin',
+        'uses' => 'ClientModificationsController@readAllByClient'
+    ]);
+
     $router->put('/{id}', [
         'middleware' => 'authOther',
         'uses' => 'ClientsController@update'

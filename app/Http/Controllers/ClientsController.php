@@ -6,8 +6,6 @@ use App\Client;
 use App\ClientModification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use DateTime;
-use DateInterval;
 
 class ClientsController extends Controller
 {
@@ -83,7 +81,7 @@ class ClientsController extends Controller
         $clientModification->client_id = $client->id;
         $clientModification->user_id = $user->id;
         $clientModification->type = ClientModification::UPDATE;
-        $clientModification->changes = json_encode("{old:" . $old . ",new:" . $client->toJson() . "}");
+        $clientModification->changes = "{old:" . $old . ",new:" . $client->toJson() . "}";
         $clientModification->save();
 
         return response(null, 204);
@@ -108,35 +106,4 @@ class ClientsController extends Controller
 
         return response(null, 204);
     }
-    /*
-
-    public function token(Request $request)
-    {
-        $email = $request->input('user');
-        $password = hash_password($request->input('password'));
-
-        $user = User::query()
-            ->where('user', $email)
-            ->where('password', $password)
-            ->first();
-
-        if ($user === null)
-            return response("Unauthorized", 401);
-
-        $expiration = new DateTime();
-        $expiration->add(new DateInterval('P1MT1M'));
-
-        [$token, $secret] = generate_token([
-            'iss' => 'localhost',
-            'name' => $user->name,
-            'user' => $user->user,
-            'exp' => $expiration->getTimestamp()
-        ]);
-
-        $user->token = $token;
-        $user->secret = $secret;
-        $user->save();
-
-        return response()->json(['token' => $token]);
-    }*/
 }
