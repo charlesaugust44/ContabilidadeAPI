@@ -10,6 +10,6 @@ class Debt extends Model
      * @var array
      */
     protected $fillable = [
-        'value','writeoff','client_id'
+        'value','writeoff','client_id','user_id'
     ];
 }

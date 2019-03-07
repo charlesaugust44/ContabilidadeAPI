@@ -62,6 +62,11 @@ $router->group(['prefix' => 'contabilidade/api/client'], function (Router $route
         'uses' => 'ClientModificationsController@readAllByClient'
     ]);
 
+    $router->get('/{id}/debts', [
+        'middleware' => 'authOther',
+        'uses' => 'DebtsController@readAllByClient'
+    ]);
+
     $router->put('/{id}', [
         'middleware' => 'authOther',
         'uses' => 'ClientsController@update'
@@ -70,5 +75,17 @@ $router->group(['prefix' => 'contabilidade/api/client'], function (Router $route
     $router->delete('/{id}', [
         'middleware' => 'authOther',
         'uses' => 'ClientsController@delete'
+    ]);
+});
+
+$router->group(['prefix' => 'contabilidade/api/debt'], function (Router $router) {
+    $router->post('', [
+        'middleware' => 'authOther',
+        'uses' => 'DebtsController@create'
+    ]);
+
+    $router->delete('/{id}', [
+        'middleware' => 'authAdmin',
+        'uses' => 'DebtsController@delete'
     ]);
 });
