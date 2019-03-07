@@ -25,15 +25,28 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Here you may define how you wish users to be authenticated for your Lumen
-        // application. The callback which receives the incoming request instance
-        // should return either a User instance or null. You're free to obtain
-        // the User instance via an API token or any other method necessary.
-
         $this->app['auth']->viaRequest('api', function ($request) {
-            if ($request->input('api_token')) {
-                return User::where('api_token', $request->input('api_token'))->first();
+            $token = $request->input('api_token');
+
+            if ($token) {
+                [$header, $payload, $signature] = explode(".", $token);
+
+                if (token_expiration($payload))
+                    return null;
+
+                $user = User::where('token', $token)->first();
+
+                if ($user == null)
+                    return null;
+
+                $serverSignature = hash_hmac('sha256', "$header.$payload", $user->secret, true);
+                $serverSignature = base64_encode($serverSignature);
+
+                if ($signature == $serverSignature)
+                    return $user;
             }
+
+            return null;
         });
     }
 }

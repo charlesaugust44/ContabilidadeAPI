@@ -3,9 +3,31 @@
 use Laravel\Lumen\Routing\Router;
 
 $router->group(['prefix' => 'contabilidade/api/'], function (Router $router) {
-    $router->post('user', 'UsersController@create');
-    $router->get('user/{id}', 'UsersController@read');
-    $router->get('user', 'UsersController@readAll');
-    $router->put('user/{id}','UsersController@update');
-    $router->delete('user/{id}','UsersController@delete');
+    $router->post('user', [
+        'middleware' => 'authAdmin',
+        'uses' => 'UsersController@create'
+    ]);
+
+    $router->get('user/{id}', [
+        'middleware' => 'authAdmin',
+        'uses' => 'UsersController@read'
+    ]);
+
+    $router->get('user', [
+        'middleware' => 'authAdmin',
+        'uses' => 'UsersController@readAll'
+    ]);
+
+    $router->put('user/{id}', [
+        'middleware' => 'authAdmin',
+        'uses' => 'UsersController@update'
+    ]);
+
+    $router->delete('user/{id}', [
+        'middleware' => 'authAdmin',
+        'uses' => 'UsersController@delete'
+    ]);
+
+    $router->get('user/token', 'UsersController@token');
 });
+

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use DateTime;
+use DateInterval;
 
 class UsersController extends Controller
 {
@@ -11,7 +13,7 @@ class UsersController extends Controller
     {
         $user = User::query()->create($request->all());
 
-        $user->password = encrypt_password($request->input('password'));
+        $user->password = hash_password($request->input('password'));
         $user->save();
 
         return response(null, 201);
@@ -51,8 +53,8 @@ class UsersController extends Controller
             if ($new_password === "")
                 return response("Empty new password!", 400);
 
-            if ($user->password === encrypt_password($old_password)) {
-                $user->password = encrypt_password($new_password);
+            if ($user->password === hash_password($old_password)) {
+                $user->password = hash_password($new_password);
                 $user->token = null;
                 $user->secret = null;
             } else
@@ -77,5 +79,35 @@ class UsersController extends Controller
         $user->delete();
 
         return response(null, 204);
+    }
+
+    public function token(Request $request)
+    {
+        $email = $request->input('user');
+        $password = hash_password($request->input('password'));
+
+        $user = User::query()
+            ->where('user', $email)
+            ->where('password', $password)
+            ->first();
+
+        if ($user === null)
+            return response("Unauthorized", 401);
+
+        $expiration = new DateTime();
+        $expiration->add(new DateInterval('P1MT1M'));
+
+        [$token, $secret] = generate_token([
+            'iss' => 'localhost',
+            'name' => $user->name,
+            'user' => $user->user,
+            'exp' => $expiration->getTimestamp()
+        ]);
+
+        $user->token = $token;
+        $user->secret = $secret;
+        $user->save();
+
+        return response()->json(['token' => $token]);
     }
 }
