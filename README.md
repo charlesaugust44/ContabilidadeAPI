@@ -1,5 +1,14 @@
 # API Contabilidade
 
+## Sumário
+
+* [Diagrama de banco de dados](#diagrama-de-banco-de-dados)
+  * [Dicionário de dados](#dicionário-de-dados)
+* [Autenticação](#autenticação)
+* [Endpoints](#endpoints)
+  * [Tabelas](#tabelas)
+  * [Data-Flow](#data-flow)
+  
 A aplicação consiste em uma API para o controle de dados referentes a parte da contabilidade de um pequeno negócio, onde as necessidades são:
 * Manter um cadastro de clientes e suas dividas;
 * Controle de acesso de usuários com dois niveis (Administradores e outros usuários);
@@ -43,7 +52,9 @@ Existem dois tipos de usuários no sistema _Administradores_ e _Outros_, todos o
 
 Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela abaixo.
 
-##### Users
+### Tabelas
+
+#### Users
 
 | Método | URI | Usuário | Descrição | 
 | :---: | :--- | :---: | :--- | 
@@ -54,7 +65,7 @@ Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela aba
 | **PUT** | /user/{id} | Admin | Update user |
 | **DELETE** | /user/{id} | Admin | Delete user |
 
-##### Client
+#### Clients
 
 | Método | URI | Usuário | Descrição | 
 | :---: | :--- | :---: | :---  |
@@ -68,7 +79,7 @@ Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela aba
 | **PUT** | /client/{id} | Other | Update client |
 | **DELETE** | /client/{id} | Other | Delete client |
 
-##### Debt
+#### Debts
 
 | Método | URI | Usuário | Descrição | 
 | :---: | :--- | :---: | :---  |
