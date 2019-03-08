@@ -67,22 +67,22 @@ Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela aba
 | **GET** | [/user/token](#get-usertoken) | - | Authenticate user |
 | **GET** | [/user/{id}](#get-userid) | Admin | Read user |
 | **GET** | [/user](#get-user) | Admin | Read all users |
-| **PUT** | [/user/{id}](#put-user) | Admin | Update user |
-| **DELETE** | [/user/{id}](#delete-user) | Admin | Delete user |
+| **PUT** | [/user/{id}](#put-userid) | Admin | Update user |
+| **DELETE** | [/user/{id}](#delete-userid) | Admin | Delete user |
 
 #### Clients
 
 | Método | URI | Usuário | Descrição | 
 | :---: | :--- | :---: | :---  |
 | **POST** | [/client](#post-client) | Others | Create client |
-| **GET** | [/client](#get-client) | Others | Read all clients |
-| **GET** | [/client/deleted](#get-clientdeleted) | Others | Read all deleted clients |
-| **GET** | [/client/nondeleted](#get-clientnondeleted) | Others | Read all non deleted clients |
+| **GET** | [/client](#get-client-ou-clientdeleted-ou-clientnondeleted) | Others | Read all clients |
+| **GET** | [/client/deleted](#get-client-ou-clientdeleted-ou-clientnondeleted) | Others | Read all deleted clients |
+| **GET** | [/client/nondeleted](#get-client-ou-clientdeleted-ou-clientnondeleted) | Others | Read all non deleted clients |
 | **GET** | [/client/{id}](#get-clientid) | Others | Read client |
 | **GET** | [/client/{id}/modfications](#get-clientidmodifications) | Admin | Read all client modifications |
 | **GET** | [/client/{id}/debts](#get-clientiddebts) | Other | Read all client debts |
 | **PUT** | [/client/{id}](#put-clientid) | Other | Update client |
-| **DELETE** | [/client/{id}](#delete-client) | Other | Delete client |
+| **DELETE** | [/client/{id}](#delete-clientid) | Other | Delete client |
 
 #### Debts
 
@@ -185,8 +185,9 @@ Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela aba
     * Status 404 - Not Found
     * Status 204 - No Content 
     
-[[voltar]](#clients)
 #### [POST] /client
+[[voltar]](#clients)
+
 * Input esperado:
     * api_token - string;
     * name - string
