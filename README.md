@@ -14,9 +14,11 @@ A aplicação consiste em uma API para o controle de dados referentes a parte da
 * Controle de acesso de usuários com dois niveis (Administradores e outros usuários);
 * Auditoria de modificação, criação e deleção de clientes e suas dívidas;
 
+[[voltar]](#sumário)
 ## Diagrama de banco de dados
 ![Diagrama de banco de dados](images/diagrama_banco.png "Diagrama")
 
+[[voltar]](#sumário)
 ### Dicionário de dados
 
 * **Tabela _clients_**
@@ -42,28 +44,31 @@ A aplicação consiste em uma API para o controle de dados referentes a parte da
   * **token** - Token gerado pela API para comunicação segura com o usuário;
   * **secret** -  Segredo(senha) utilizada para verificar a autenticidade do token; 
   
+[[voltar]](#sumário)
 ## Autenticação
 
 A autenticação é feita por meio de tokens, os quais são gerados no login e enviado para o usuário, que deverá utilizar apenas o token para se comunicar com os endpoints protegidos. Ele possuí um tempo de expiração embutido, que para caso de testes está setado para um mês.
 O token segue os padrões da [RFC 7519](https://tools.ietf.org/html/rfc7519) para JSON Web Tokens, ele é validado por meio de uma chave de 60 carácteres alfanuméricos, incluindo simbolos especiais, utilizada para checar a autenticidade do token.
 Existem dois tipos de usuários no sistema _Administradores_ e _Outros_, todos os endpoints podem ser acessados pelo _Administrador_. _Outros_ são impedidos de utilizar os endpoints relaciodados ao CRUD de usuário e à auditoria de modificações do cliente. 
 
+[[voltar]](#sumário)
 ## Endpoints
 
 Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela abaixo.
 
+[[voltar]](#sumário)
 ### Tabelas
 
 #### Users
 
 | Método | URI | Usuário | Descrição | 
 | :---: | :--- | :---: | :--- | 
-| **POST** | /user | Admin | Create user |
-| **GET** | /user/token | - | Authenticate user |
-| **GET** | /user/{id} | Admin | Read user |
-| **GET** | /user | Admin | Read all users |
-| **PUT** | /user/{id} | Admin | Update user |
-| **DELETE** | /user/{id} | Admin | Delete user |
+| **POST** | [/user](#post-user) | Admin | Create user |
+| **GET** | [/user/token](#get-usertoken) | - | Authenticate user |
+| **GET** | [/user/{id}](#get-userid) | Admin | Read user |
+| **GET** | [/user](#get-user) | Admin | Read all users |
+| **PUT** | [/user/{id}](#put-user) | Admin | Update user |
+| **DELETE** | [/user/{id}](#delete-user) | Admin | Delete user |
 
 #### Clients
 
@@ -86,9 +91,10 @@ Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela aba
 | **POST** | /debt | Others | Create debt |
 | **DELETE** | /debt/{id} | Admin | Delete debt |
 
+[[voltar]](#sumário)
 ### Data-Flow
 
-
+[[voltar]](#users)
 #### [POST] /user
 * Input esperado:
     * api_token - string;
@@ -99,6 +105,7 @@ Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela aba
 * Output:
     * Status 201 - Created
     
+[[voltar]](#users)
 #### [GET] /user/token
 * Input esperado:
     * user - string;
@@ -111,7 +118,8 @@ Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela aba
       "token":"API_TOKEN"  
     }    
     ```
-    
+
+[[voltar]](#users)
 #### [GET] /user/{id}
 * Input esperado:
     * api_token - string;
@@ -129,6 +137,7 @@ Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela aba
     }  
     ```
     
+[[voltar]](#users)
 #### [GET] /user
 * Input esperado:
     * api_token - string;
@@ -148,6 +157,7 @@ Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela aba
     ]    
     ```
     
+[[voltar]](#users)
 #### [PUT] /user/{id}
 * Input esperado:
     * api_token - string;
@@ -160,7 +170,8 @@ Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela aba
     * Status 400 - Bad Request
     * Status 404 - Not Found
     * Status 204 - No Content 
-    
+
+[[voltar]](#users)
 #### [DELETE] /user/{id}
 * Input esperado:
     * api_token - string;
@@ -168,6 +179,7 @@ Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela aba
     * Status 404 - Not Found
     * Status 204 - No Content 
     
+[[voltar]](#clients)
 #### [POST] /client
 * Input esperado:
     * api_token - string;
@@ -176,6 +188,7 @@ Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela aba
 * Output:
     * Status 201 - Created
 
+[[voltar]](#clients)
 #### [GET] /client ou /client/deleted ou /client/nondeleted
 * Input esperado:
     * api_token - string;
@@ -194,6 +207,8 @@ Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela aba
         }
     ] 
     ```
+    
+[[voltar]](#clients)
 #### [GET] /client/{id}
 * Input esperado:
     * api_token - string;
@@ -211,6 +226,7 @@ Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela aba
     } 
     ```
 
+[[voltar]](#clients)
 #### [GET] /client/{id}/modifications
 * Input esperado:
     * api_token - string;
@@ -231,6 +247,7 @@ Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela aba
     ] 
     ```
 
+[[voltar]](#clients)
 #### [GET] /client/{id}/debts
 * Input esperado:
     * api_token - string;
@@ -250,7 +267,8 @@ Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela aba
         }
     ] 
     ```
-    
+ 
+[[voltar]](#clients)
 #### [PUT] /client/{id}
 * Input esperado:
     * api_token - string;
@@ -262,14 +280,16 @@ Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela aba
 * Output:
     * Status 404 - Not Found
     * Status 204 - No Content 
-    
+
+[[voltar]](#clients)
 #### [DELETE] /client/{id}
 * Input esperado:
     * api_token - string;
 * Output:
     * Status 404 - Not Found
     * Status 204 - No Content
-    
+
+[[voltar]](#debts)
 #### [POST] /debt
 * Input esperado:
     * api_token - string;
@@ -280,6 +300,7 @@ Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela aba
 * Output:
     * Status 201 - Created
 
+[[voltar]](#debts)
 #### [DELETE] /debt/{id}
 * Input esperado:
     * api_token - string;
