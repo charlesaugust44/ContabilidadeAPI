@@ -1,15 +1,14 @@
-#API Contabilidade
+# API Contabilidade
 
 A aplicação consiste em uma API para o controle de dados referentes a parte da contabilidade de um pequeno negócio, onde as necessidades são:
 * Manter um cadastro de clientes e suas dividas;
 * Controle de acesso de usuários com dois niveis (Administradores e outros usuários);
 * Auditoria de modificação, criação e deleção de clientes e suas dívidas;
 
-##Diagrama de banco de dados
-
+## Diagrama de banco de dados
 ![Diagrama de banco de dados](images/diagrama_banco.png "Diagrama")
 
-###Dicionário de dados
+### Dicionário de dados
 
 * **Tabela _clients_**
   * **name** - Nome do cliente;
@@ -34,13 +33,13 @@ A aplicação consiste em uma API para o controle de dados referentes a parte da
   * **token** - Token gerado pela API para comunicação segura com o usuário;
   * **secret** -  Segredo(senha) utilizada para verificar a autenticidade do token; 
   
-##Autenticação
+## Autenticação
 
 A autenticação é feita por meio de tokens, os quais são gerados no login e enviado para o usuário, que deverá utilizar apenas o token para se comunicar com os endpoints protegidos. Ele possuí um tempo de expiração embutido, que para caso de testes está setado para um mês.
 O token segue os padrões da [RFC 7519](https://tools.ietf.org/html/rfc7519) para JSON Web Tokens, ele é validado por meio de uma chave de 60 carácteres alfanuméricos, incluindo simbolos especiais, utilizada para checar a autenticidade do token.
 Existem dois tipos de usuários no sistema _Administradores_ e _Outros_, todos os endpoints podem ser acessados pelo _Administrador_. _Outros_ são impedidos de utilizar os endpoints relaciodados ao CRUD de usuário e à auditoria de modificações do cliente. 
 
-##Endpoints
+## Endpoints
 
 Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela abaixo.
 
