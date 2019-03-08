@@ -2,7 +2,9 @@
 
 use Laravel\Lumen\Routing\Router;
 
-$router->group(['prefix' => 'contabilidade/api/user'], function (Router $router) {
+$prefix = 'contabilidade/api';
+
+$router->group(['prefix' => "$prefix/user"], function (Router $router) {
     $router->post('', [
         'middleware' => 'authAdmin',
         'uses' => 'UsersController@create'
@@ -31,7 +33,7 @@ $router->group(['prefix' => 'contabilidade/api/user'], function (Router $router)
     ]);
 });
 
-$router->group(['prefix' => 'contabilidade/api/client'], function (Router $router) {
+$router->group(['prefix' => "$prefix/client"], function (Router $router) {
     $router->post('', [
         'middleware' => 'authOther',
         'uses' => 'ClientsController@create'
@@ -78,7 +80,7 @@ $router->group(['prefix' => 'contabilidade/api/client'], function (Router $route
     ]);
 });
 
-$router->group(['prefix' => 'contabilidade/api/debt'], function (Router $router) {
+$router->group(['prefix' => "$prefix/debt"], function (Router $router) {
     $router->post('', [
         'middleware' => 'authOther',
         'uses' => 'DebtsController@create'
