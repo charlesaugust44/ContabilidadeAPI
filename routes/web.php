@@ -2,7 +2,7 @@
 
 use Laravel\Lumen\Routing\Router;
 
-$prefix = 'contabilidade/api';
+$prefix = 'api/v1';
 
 $router->group(['prefix' => "$prefix/user"], function (Router $router) {
     $router->post('', [
