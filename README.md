@@ -2,19 +2,24 @@
 
 ## Sumário
 
-* [Diagrama de banco de dados](#diagrama-de-banco-de-dados)
+* [Introdução](#introdução)
+* [Banco de dados](#banco-de-dados)
+  * [Diagrama](#diagrama)
   * [Dicionário de dados](#dicionário-de-dados)
 * [Autenticação](#autenticação)
 * [Endpoints](#endpoints)
   * [Tabelas](#tabelas)
   * [Data-Flow](#data-flow)
   
+## Introdução
 A aplicação consiste em uma API para o controle de dados referentes a parte da contabilidade de um pequeno negócio, onde as necessidades são:
 * Manter um cadastro de clientes e suas dividas;
 * Controle de acesso de usuários com dois niveis (Administradores e outros usuários);
 * Auditoria de modificação, criação e deleção de clientes e suas dívidas;
 
-## Diagrama de banco de dados
+## Banco de dados
+
+### Diagrama
 [[voltar]](#sumário)
 ![Diagrama de banco de dados](images/diagrama_banco.png "Diagrama")
 
