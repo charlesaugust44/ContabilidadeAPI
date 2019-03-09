@@ -6,6 +6,7 @@
 * [Banco de dados](#banco-de-dados)
   * [Diagrama](#diagrama)
   * [Dicionário de dados](#dicionário-de-dados)
+  * [Migration e Seeders](#migration-e-seeders)
 * [Autenticação](#autenticação)
 * [Endpoints](#endpoints)
   * [Postman](#postman)
@@ -50,6 +51,20 @@ A aplicação consiste em uma API para o controle de dados referentes a parte da
   * **token** - Token gerado pela API para comunicação segura com o usuário;
   * **secret** -  Segredo(senha) utilizada para verificar a autenticidade do token; 
   
+### Migration e Seeders
+
+O código-fonte possuí _migrations_ e _seeders_ para todas as tabelas e pode ser executados com os seguintes comandos:
+
+Migration:
+```
+php artisan migrate
+```
+
+Seeder:
+```
+php artisan db:seed
+```
+
 ## Autenticação
 [[voltar]](#sumário)
 
