@@ -8,6 +8,7 @@
   * [Dicionário de dados](#dicionário-de-dados)
 * [Autenticação](#autenticação)
 * [Endpoints](#endpoints)
+  * [Postman](#postman)
   * [Tabelas](#tabelas)
   * [Data-Flow](#data-flow)
   
@@ -52,17 +53,34 @@ A aplicação consiste em uma API para o controle de dados referentes a parte da
 ## Autenticação
 [[voltar]](#sumário)
 
-A autenticação é feita por meio de tokens, os quais são gerados no login e enviado para o usuário, que deverá utilizar apenas o token para se comunicar com os endpoints protegidos. Ele possuí um tempo de expiração embutido, que para caso de testes está setado para um mês.
+A autenticação é feita por meio de tokens, os quais são gerados no login e enviados para o usuário, que deverá utilizar apenas o token para se comunicar com os endpoints protegidos. Ele possuí um tempo de expiração embutido, que para caso de testes está setado para um mês.
+
 O token segue os padrões da [RFC 7519](https://tools.ietf.org/html/rfc7519) para JSON Web Tokens, ele é validado por meio de uma chave de 60 carácteres alfanuméricos, incluindo simbolos especiais, utilizada para checar a autenticidade do token.
+
 Existem dois tipos de usuários no sistema _Administradores_ e _Outros_, todos os endpoints podem ser acessados pelo _Administrador_. _Outros_ são impedidos de utilizar os endpoints relaciodados ao CRUD de usuário e à auditoria de modificações do cliente. 
 
 ## Endpoints
 [[voltar]](#sumário)
 
-Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela abaixo.
 
+### Postman
+[[voltar]](#sumário)
+
+Durante o desenvolvimento foi utilizado a ferramenta [Postman](https://www.getpostman.com/) para testar e documentar os endpoints, segue abaixo um link de convite para o workspace desta API:
+
+```
+https://app.getpostman.com/join-team?invite_code=c5a50d38f65224188805fd291715ba0e
+```
+
+Ao entrar no [Postman](https://www.getpostman.com/) selecione este _Team Workspace_, e mude o _enviroment_ para **Contabilidade**.
+
+O endpoint /user/token possuí um script de teste que ira automaticamente atualizar a variavel _{{token}}_ do _enviroment_
+ facilitando o uso. Também é possivel alterar o prefixo do URI e o domínio e porta utlizado pelo servidor (default: http://localhost:8002).
+ 
 ### Tabelas
 [[voltar]](#sumário)
+
+Todos os endpoints contém o prefixo _/api/v1_ que serão omitidos na tabela abaixo.
 
 #### Users
 
